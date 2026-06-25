@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
+const _fontFamily = 'Hanken Grotesk';
+
 class AppTextStyles {
   static const display = TextStyle(
+    fontFamily: _fontFamily,
     fontSize: 32,
     fontWeight: FontWeight.w700,
     color: AppColors.textPrimary,
@@ -11,6 +14,7 @@ class AppTextStyles {
   );
 
   static const displayMobile = TextStyle(
+    fontFamily: _fontFamily,
     fontSize: 28,
     fontWeight: FontWeight.w700,
     color: AppColors.textPrimary,
@@ -19,6 +23,7 @@ class AppTextStyles {
   );
 
   static const headline = TextStyle(
+    fontFamily: _fontFamily,
     fontSize: 24,
     fontWeight: FontWeight.w600,
     color: AppColors.textPrimary,
@@ -27,6 +32,7 @@ class AppTextStyles {
   );
 
   static const title = TextStyle(
+    fontFamily: _fontFamily,
     fontSize: 20,
     fontWeight: FontWeight.w600,
     color: AppColors.textPrimary,
@@ -34,6 +40,7 @@ class AppTextStyles {
   );
 
   static const body = TextStyle(
+    fontFamily: _fontFamily,
     fontSize: 16,
     fontWeight: FontWeight.w400,
     color: AppColors.textPrimary,
@@ -41,6 +48,7 @@ class AppTextStyles {
   );
 
   static const bodySmall = TextStyle(
+    fontFamily: _fontFamily,
     fontSize: 14,
     fontWeight: FontWeight.w400,
     color: AppColors.textPrimary,
@@ -48,6 +56,7 @@ class AppTextStyles {
   );
 
   static const caption = TextStyle(
+    fontFamily: _fontFamily,
     fontSize: 14,
     fontWeight: FontWeight.w400,
     color: AppColors.textSecondary,
@@ -55,6 +64,7 @@ class AppTextStyles {
   );
 
   static const label = TextStyle(
+    fontFamily: _fontFamily,
     fontSize: 12,
     fontWeight: FontWeight.w500,
     color: AppColors.textSecondary,

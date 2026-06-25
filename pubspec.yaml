@@ -48,3 +48,8 @@ flutter:
   assets:
     - assets/icons/
     - assets/illustrations/
+
+  fonts:
+    - family: Hanken Grotesk
+      fonts:
+        - asset: assets/fonts/HankenGrotesk-Variable.ttf

@@ -6,6 +6,7 @@ import '../../core/theme/app_text_styles.dart';
 import '../../core/utils/date_utils.dart';
 import '../../providers/task_provider.dart';
 import '../../providers/call_log_provider.dart';
+import '../../services/hive_service.dart';
 import 'widgets/today_card.dart';
 import 'widgets/overdue_card.dart';
 import 'widgets/upcoming_card.dart';
@@ -37,6 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final taskProvider = context.watch<TaskProvider>();
     final callLogProvider = context.watch<CallLogProvider>();
+    final userName = HiveService.userName;
+    final greeting = userName != null
+        ? '${AppDateUtils.getGreeting()}, $userName'
+        : AppDateUtils.getGreeting();
 
     return Scaffold(
       body: SafeArea(
@@ -46,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(AppDateUtils.getGreeting(), style: AppTextStyles.displayMobile),
+                Text(greeting, style: AppTextStyles.displayMobile),
                 const Gap(4),
                 Text(
                   AppDateUtils.formatDate(DateTime.now()),
