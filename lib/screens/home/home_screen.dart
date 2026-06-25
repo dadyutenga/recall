@@ -48,14 +48,32 @@ class _HomeScreenState extends State<HomeScreen> {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
               children: [
-                Text(greeting, style: AppTextStyles.displayMobile),
-                const Gap(4),
-                Text(
-                  AppDateUtils.formatDate(DateTime.now()),
-                  style: AppTextStyles.caption,
+                Container(
+                  width: 56,
+                  height: 56,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    image: const DecorationImage(
+                      image: AssetImage('assets/img/usericons.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                const Gap(16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(greeting, style: AppTextStyles.headline),
+                      const Gap(4),
+                      Text(
+                        AppDateUtils.formatDate(DateTime.now()),
+                        style: AppTextStyles.caption,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

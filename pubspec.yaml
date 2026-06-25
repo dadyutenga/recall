@@ -48,6 +48,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/illustrations/
+    - assets/img/
 
   fonts:
     - family: Hanken Grotesk
