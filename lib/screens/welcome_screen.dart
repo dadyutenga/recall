@@ -38,17 +38,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                color: AppColors.primaryLight,
-                borderRadius: BorderRadius.circular(24),
-              ),
-              child: const Icon(
-                Icons.notifications_active_outlined,
-                size: 64,
-                color: AppColors.primary,
-              ),
+            Image.asset(
+              'assets/img/loader.png',
+              width: 120,
+              height: 120,
+              fit: BoxFit.contain,
             ),
             const SizedBox(height: 32),
             Text(

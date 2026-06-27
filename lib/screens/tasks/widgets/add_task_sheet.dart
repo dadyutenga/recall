@@ -10,15 +10,26 @@ import '../../../models/task_model.dart';
 import '../../../providers/task_provider.dart';
 
 class AddTaskSheet extends StatefulWidget {
-  const AddTaskSheet({super.key});
+  final String? initialType;
+  final String? initialTitle;
+  final String? initialContactName;
+  final String? initialPhone;
+
+  const AddTaskSheet({
+    super.key,
+    this.initialType,
+    this.initialTitle,
+    this.initialContactName,
+    this.initialPhone,
+  });
 
   @override
   State<AddTaskSheet> createState() => _AddTaskSheetState();
 }
 
 class _AddTaskSheetState extends State<AddTaskSheet> {
-  int _step = 1;
-  String _type = AppConstants.taskTypeCallback;
+  late int _step;
+  late String _type;
 
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
@@ -29,6 +40,17 @@ class _AddTaskSheetState extends State<AddTaskSheet> {
   DateTime? _dueDate;
   bool _setReminder = false;
   DateTime? _reminderDate;
+
+  @override
+  void initState() {
+    super.initState();
+    _type = widget.initialType ?? AppConstants.taskTypeCallback;
+    _titleController.text = widget.initialTitle ?? '';
+    _contactController.text = widget.initialContactName ?? '';
+    _phoneController.text = widget.initialPhone ?? '';
+    // If a type was provided (e.g. callback from a missed call), skip step 1
+    _step = widget.initialType != null ? 2 : 1;
+  }
 
   @override
   void dispose() {
@@ -61,9 +83,17 @@ class _AddTaskSheetState extends State<AddTaskSheet> {
     if (date != null) setState(() => _reminderDate = date);
   }
 
+  String? _titleError;
+  String? _dueDateError;
+
   Future<void> _save() async {
-    if (_titleController.text.trim().isEmpty) return;
-    if (_dueDate == null) return;
+    setState(() {
+      _titleError =
+          _titleController.text.trim().isEmpty ? 'Title is required' : null;
+      _dueDateError = _dueDate == null ? 'Due date is required' : null;
+    });
+
+    if (_titleError != null || _dueDateError != null) return;
 
     final task = TaskModel(
       id: const Uuid().v4(),
@@ -184,9 +214,10 @@ class _AddTaskSheetState extends State<AddTaskSheet> {
         const Gap(16),
         TextField(
           controller: _titleController,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             labelText: 'Title',
-            border: OutlineInputBorder(),
+            border: const OutlineInputBorder(),
+            errorText: _titleError,
           ),
         ),
         const Gap(12),
@@ -228,6 +259,12 @@ class _AddTaskSheetState extends State<AddTaskSheet> {
           trailing: const Icon(Icons.calendar_today),
           onTap: _pickDueDate,
         ),
+        if (_dueDateError != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 6, left: 12),
+            child: Text(_dueDateError!,
+                style: const TextStyle(color: Colors.red, fontSize: 12)),
+          ),
         const Gap(12),
         Text('Priority', style: AppTextStyles.label),
         const Gap(6),
